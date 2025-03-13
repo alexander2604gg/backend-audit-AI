@@ -11,6 +11,6 @@ FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
-COPY --from=build /app/target/auditai-0.0.1-SNAPSHOT.jar /app/rrhh-project.jar
+COPY --from=build /app/target/auditai-0.0.1-SNAPSHOT.jar /app/auditai.jar
 
 EXPOSE 8080
