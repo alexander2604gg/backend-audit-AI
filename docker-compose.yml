@@ -1,0 +1,10 @@
+services:
+  rrhh-project:
+    build:
+      context: ./auditai
+      dockerfile: Dockerfile
+    container_name: app-container
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
