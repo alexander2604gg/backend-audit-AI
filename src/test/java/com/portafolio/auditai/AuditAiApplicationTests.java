@@ -1,4 +1,4 @@
-package com.portafolio.audit_AI;
+package com.portafolio.auditai;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

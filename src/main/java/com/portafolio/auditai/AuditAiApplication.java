@@ -1,4 +1,4 @@
-package com.portafolio.audit_AI;
+package com.portafolio.auditai;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
