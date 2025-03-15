@@ -1,5 +1,6 @@
 package com.portafolio.auditai.controller;
 
+import com.portafolio.auditai.dto.DeepSeekResponseDto;
 import com.portafolio.auditai.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +15,8 @@ public class ChatController {
     private ChatService chatService;
 
     @PostMapping("/completions")
-    public ResponseEntity<String> handleChatRequest(@RequestBody String message) {
-
-        String response = chatService.getResponse(message);
-        return ResponseEntity.ok(response);
-
-
+    public ResponseEntity<DeepSeekResponseDto> handleChatRequest(@RequestBody String message) {
+        return ResponseEntity.ok(chatService.getResponse(message));
     }
 
 }

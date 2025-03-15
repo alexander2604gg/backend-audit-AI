@@ -1,6 +1,8 @@
 package com.portafolio.auditai.service;
 
+import com.portafolio.auditai.dto.DeepSeekResponseDto;
+
 public interface ChatService {
 
-    String getResponse(String prompt);
+    DeepSeekResponseDto getResponse(String prompt);
 }

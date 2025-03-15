@@ -16,21 +16,21 @@ public class ChatServiceImpl implements ChatService {
 
     private final DeepSeekClient deepSeekClient;
 
-    public String getResponse(String userInput) {
+    public DeepSeekResponseDto getResponse(String userInput) {
         // 1. Construye el request correctamente
-        Message message = new Message("user" , userInput);
+        Message messageFromBackend = new Message("system" , "Actúa como un auditor financiero especializado en la " +
+                "detección de irregularidades. Analiza estados financieros, balances, estados de resultados y flujos de efectivo " +
+                "para identificar inconsistencias, anomalías o posibles fraudes. Examina patrones sospechosos, discrepancias en los" +
+                " datos y cualquier indicio de manipulación contable. Presenta tu análisis con una justificación clara y basada en " +
+                "datos.");
+        Message messageFromUser = new Message("user" ,userInput);
         DeepSeekRequestDto request = new DeepSeekRequestDto(
                 "deepseek-chat",
-                List.of(message),
-                0.7
+                List.of(messageFromBackend , messageFromUser),
+                0.5
         );
 
-        // 2. Obtiene la respuesta completa
-        DeepSeekResponseDto response = deepSeekClient.chatCompletion(request);
-
-        // 3. Extrae el contenido
-        return response.getChoices().get(0)
-                .getMessage().getContent();
+        return deepSeekClient.chatCompletion(request);
     }
 
 }
