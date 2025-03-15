@@ -30,7 +30,7 @@ public class ChatServiceImpl implements ChatService {
         Message messageFromUser = new Message("user" ,userInput);
         DeepSeekRequestDto request = new DeepSeekRequestDto(
                 "deepseek-chat",
-                List.of(messageFromBackend , messageFromUser),
+                List.of(messageFromBackend , messageResponse, messageFromUser),
                 0.5
         );
 
