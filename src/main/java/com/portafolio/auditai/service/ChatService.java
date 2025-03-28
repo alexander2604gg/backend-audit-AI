@@ -1,6 +1,7 @@
 package com.portafolio.auditai.service;
 
-public interface ChatService {
+import java.util.List;
 
-    String getResponse(String prompt);
+public interface ChatService {
+    public String getResponse(String role , List<String> input);
 }

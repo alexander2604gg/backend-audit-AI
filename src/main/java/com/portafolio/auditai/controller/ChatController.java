@@ -13,13 +13,10 @@ public class ChatController {
     @Autowired
     private ChatService chatService;
 
-    @PostMapping("/completions")
+    /*@PostMapping("/completions")
     public ResponseEntity<String> handleChatRequest(@RequestBody String message) {
-
         String response = chatService.getResponse(message);
         return ResponseEntity.ok(response);
-
-
-    }
+    }*/
 
 }

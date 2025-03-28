@@ -8,6 +8,7 @@ import com.portafolio.auditai.service.ChatService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,19 +17,18 @@ public class ChatServiceImpl implements ChatService {
 
     private final DeepSeekClient deepSeekClient;
 
-    public String getResponse(String userInput) {
-        // 1. Construye el request correctamente
-        Message message = new Message("user" , userInput);
+    public String getResponse(String role , List<String> input) {
+        List<Message> messages = new ArrayList<>();
+        input.forEach((i) -> {
+            Message message = new Message(role , i);
+            messages.add(message);
+        });
         DeepSeekRequestDto request = new DeepSeekRequestDto(
                 "deepseek-chat",
-                List.of(message),
+                messages,
                 0.7
         );
-
-        // 2. Obtiene la respuesta completa
         DeepSeekResponseDto response = deepSeekClient.chatCompletion(request);
-
-        // 3. Extrae el contenido
         return response.getChoices().get(0)
                 .getMessage().getContent();
     }
