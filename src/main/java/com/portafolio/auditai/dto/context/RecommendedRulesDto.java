@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class RecommendedRules {
-    @JsonProperty("normativas_recomendadas")
+public class RecommendedRulesDto {
+    @JsonProperty("recommendedRules")
     private List<String> recommendedRules;
 }

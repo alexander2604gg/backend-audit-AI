@@ -4,6 +4,7 @@ import com.portafolio.auditai.client.deepseek.DeepSeekClient;
 import com.portafolio.auditai.dto.DeepSeekRequestDto;
 import com.portafolio.auditai.dto.DeepSeekResponseDto;
 import com.portafolio.auditai.dto.Message;
+import com.portafolio.auditai.enums.EnumValueModel;
 import com.portafolio.auditai.service.ChatService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,14 +24,9 @@ public class ChatServiceImpl implements ChatService {
             Message message = new Message(role , i);
             messages.add(message);
         });
-        DeepSeekRequestDto request = new DeepSeekRequestDto(
-                "deepseek-chat",
-                messages,
-                0.7
-        );
+        DeepSeekRequestDto request = new DeepSeekRequestDto(EnumValueModel.DEEPSEEK_MODEL.getModel(), messages, 0.7);
         DeepSeekResponseDto response = deepSeekClient.chatCompletion(request);
         return response.getChoices().get(0)
                 .getMessage().getContent();
     }
-
 }
