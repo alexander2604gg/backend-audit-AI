@@ -73,18 +73,19 @@ public class ContextServiceImpl implements ContextService {
                 "  {\n" +
                 "    \"nombre\": \"Detección de transacciones sospechosas (AML)\",\n" +
                 "    \"descripcion\": \"Alertar si una transacción supera los $10,000 sin aprobación de gerencia.\",\n" +
-                "    \"normativa_relacionada\": \"AML\",\n" +
+                "    \"normativaRelacionada\": \"AML\",\n" +
                 "    \"severidad\": \"alta\",\n" +
-                "    \"campos_involucrados\": [\"monto\", \"aprobacion_gerencia\"]\n" +
+                "    \"camposInvolucrados\": [\"monto\", \"aprobacionGerencia\"]\n" +
                 "  },\n" +
                 "  {\n" +
                 "    \"nombre\": \"Segregación de funciones (SOX)\",\n" +
                 "    \"descripcion\": \"Evitar que el mismo empleado registre y apruebe una transacción.\",\n" +
-                "    \"normativa_relacionada\": \"SOX\",\n" +
+                "    \"normativaRelacionada\": \"SOX\",\n" +
                 "    \"severidad\": \"media\",\n" +
-                "    \"campos_involucrados\": [\"empleado\"]\n" +
+                "    \"camposInvolucrados\": [\"empleado\"]\n" +
                 "  }\n" +
                 "]";
+
 
         String response = chatService.getResponse(EnumValueRole.SYSTEM.getRole(), prompts);
         String json = jsonParserService.extractJson(response);
