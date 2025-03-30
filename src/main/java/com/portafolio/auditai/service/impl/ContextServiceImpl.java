@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.regex.Pattern;
 public class ContextServiceImpl implements ContextService {
 
     private final ChatService chatService;
+
     private final JsonParserService jsonParserService;
 
     @Override
@@ -44,4 +46,11 @@ public class ContextServiceImpl implements ContextService {
         String json = jsonParserService.extractJson(response);
         return jsonParserService.toObject(json , RecommendedRulesDto.class);
     }
+
+    @Override
+    public Mono<String> getRulesRecommendationsReactive(AuditParametersDto auditParametersDto) {
+        return null;
+    }
+
+
 }
