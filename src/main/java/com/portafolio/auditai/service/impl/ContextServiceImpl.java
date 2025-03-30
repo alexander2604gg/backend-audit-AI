@@ -52,7 +52,7 @@ public class ContextServiceImpl implements ContextService {
     }
 
     @Override
-    public RuleDto getRules(AuditConfigDto auditConfigDto) {
+    public RuleListDto getRules(AuditConfigDto auditConfigDto) {
         List<String> prompts = new ArrayList<>();
 
         ContextAuditDto context = auditConfigDto.getContextAuditDto();
@@ -69,26 +69,33 @@ public class ContextServiceImpl implements ContextService {
                 "- Nivel de detalle: " + configIA.getDetailLevel() + "\n" +
                 "- Idioma: " + configIA.getLanguage() + "\n\n" +
                 "Formato de salida esperado:\n" +
-                "[\n" +
-                "  {\n" +
-                "    \"nombre\": \"Detección de transacciones sospechosas (AML)\",\n" +
-                "    \"descripcion\": \"Alertar si una transacción supera los $10,000 sin aprobación de gerencia.\",\n" +
-                "    \"normativaRelacionada\": \"AML\",\n" +
-                "    \"severidad\": \"alta\",\n" +
-                "    \"camposInvolucrados\": [\"monto\", \"aprobacionGerencia\"]\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"nombre\": \"Segregación de funciones (SOX)\",\n" +
-                "    \"descripcion\": \"Evitar que el mismo empleado registre y apruebe una transacción.\",\n" +
-                "    \"normativaRelacionada\": \"SOX\",\n" +
-                "    \"severidad\": \"media\",\n" +
-                "    \"camposInvolucrados\": [\"empleado\"]\n" +
-                "  }\n" +
-                "]";
+                "{\n" +
+                "  \"rules\": [\n" +
+                "    {\n" +
+                "      \"nombre\": \"Detección de transacciones sospechosas (AML)\",\n" +
+                "      \"descripcion\": \"Alertar si una transacción supera los $10,000 sin aprobación de gerencia.\",\n" +
+                "      \"normativaRelacionada\": \"AML\",\n" +
+                "      \"severidad\": \"alta\",\n" +
+                "      \"camposInvolucrados\": [\"monto\", \"aprobacionGerencia\"]\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"nombre\": \"Segregación de funciones (SOX)\",\n" +
+                "      \"descripcion\": \"Evitar que el mismo empleado registre y apruebe una transacción.\",\n" +
+                "      \"normativaRelacionada\": \"SOX\",\n" +
+                "      \"severidad\": \"media\",\n" +
+                "      \"camposInvolucrados\": [\"empleado\"]\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}";
 
         prompts.add(prompt1);
+
+        // Obtener respuesta del servicio
         String response = chatService.getResponse(EnumValueRole.SYSTEM.getRole(), prompts);
         String json = jsonParserService.extractJson(response);
-        return jsonParserService.toObject(json , RuleDto.class);
+
+        // Convertir a RuleListDto
+        return jsonParserService.toObject(json, RuleListDto.class);
     }
+
 }
