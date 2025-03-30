@@ -1,4 +1,5 @@
 package com.portafolio.auditai.controller;
+import com.portafolio.auditai.dto.context.AuditConfigDto;
 import com.portafolio.auditai.dto.context.AuditParametersDto;
 import com.portafolio.auditai.dto.context.RecommendedRulesDto;
 import com.portafolio.auditai.service.ContextService;
@@ -23,6 +24,11 @@ public class ContextController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PostMapping("/getRules")
+    public ResponseEntity<String> getRules (@RequestBody AuditConfigDto auditConfigDto) {
+        return ResponseEntity.ok(contextService.getRules(auditConfigDto));
     }
 
 }

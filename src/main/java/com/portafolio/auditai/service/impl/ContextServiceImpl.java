@@ -1,7 +1,6 @@
 package com.portafolio.auditai.service.impl;
 
-import com.portafolio.auditai.dto.context.AuditParametersDto;
-import com.portafolio.auditai.dto.context.RecommendedRulesDto;
+import com.portafolio.auditai.dto.context.*;
 import com.portafolio.auditai.enums.EnumValueRole;
 import com.portafolio.auditai.service.ChatService;
 import com.portafolio.auditai.service.ContextService;
@@ -50,6 +49,45 @@ public class ContextServiceImpl implements ContextService {
     @Override
     public Mono<String> getRulesRecommendationsReactive(AuditParametersDto auditParametersDto) {
         return null;
+    }
+
+    @Override
+    public String getRules(AuditConfigDto auditConfigDto) {
+        List<String> prompts = new ArrayList<>();
+
+        ContextAuditDto context = auditConfigDto.getContextAuditDto();
+        ConfigIADto configIA = auditConfigDto.getConfigIADto();
+
+        // Construcción dinámica del prompt
+        String prompt1 = "Genera una lista de reglas de auditoría basadas en el contexto proporcionado. " +
+                "Cada regla debe incluir un nombre, descripción, normativa relacionada, severidad y campos involucrados.\n\n" +
+                "Datos de entrada:\n" +
+                "- Sector: " + context.getSector() + "\n" +
+                "- Tipo de auditoría: " + context.getAuditType() + "\n" +
+                "- Normativas aplicables: " + String.join(", ", context.getNormativas()) + "\n" +
+                "- Campos disponibles: " + String.join(", ", context.getMetadata().getHeadCsv()) + "\n" +
+                "- Nivel de detalle: " + configIA.getDetailLevel() + "\n" +
+                "- Idioma: " + configIA.getLanguage() + "\n\n" +
+                "Formato de salida esperado:\n" +
+                "[\n" +
+                "  {\n" +
+                "    \"nombre\": \"Detección de transacciones sospechosas (AML)\",\n" +
+                "    \"descripcion\": \"Alertar si una transacción supera los $10,000 sin aprobación de gerencia.\",\n" +
+                "    \"normativa_relacionada\": \"AML\",\n" +
+                "    \"severidad\": \"alta\",\n" +
+                "    \"campos_involucrados\": [\"monto\", \"aprobacion_gerencia\"]\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"nombre\": \"Segregación de funciones (SOX)\",\n" +
+                "    \"descripcion\": \"Evitar que el mismo empleado registre y apruebe una transacción.\",\n" +
+                "    \"normativa_relacionada\": \"SOX\",\n" +
+                "    \"severidad\": \"media\",\n" +
+                "    \"campos_involucrados\": [\"empleado\"]\n" +
+                "  }\n" +
+                "]";
+
+        prompts.add(prompt1);
+        return String.join("\n", prompts);
     }
 
 
