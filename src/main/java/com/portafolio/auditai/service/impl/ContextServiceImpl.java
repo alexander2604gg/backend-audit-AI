@@ -52,7 +52,7 @@ public class ContextServiceImpl implements ContextService {
     }
 
     @Override
-    public String getRules(AuditConfigDto auditConfigDto) {
+    public RuleDto getRules(AuditConfigDto auditConfigDto) {
         List<String> prompts = new ArrayList<>();
 
         ContextAuditDto context = auditConfigDto.getContextAuditDto();
@@ -86,8 +86,9 @@ public class ContextServiceImpl implements ContextService {
                 "  }\n" +
                 "]";
 
-        prompts.add(prompt1);
-        return String.join("\n", prompts);
+        String response = chatService.getResponse(EnumValueRole.SYSTEM.getRole(), prompts);
+        String json = jsonParserService.extractJson(response);
+        return jsonParserService.toObject(json , RuleDto.class);
     }
 
 

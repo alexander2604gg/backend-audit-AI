@@ -2,6 +2,7 @@ package com.portafolio.auditai.controller;
 import com.portafolio.auditai.dto.context.AuditConfigDto;
 import com.portafolio.auditai.dto.context.AuditParametersDto;
 import com.portafolio.auditai.dto.context.RecommendedRulesDto;
+import com.portafolio.auditai.dto.context.RuleDto;
 import com.portafolio.auditai.service.ContextService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ public class ContextController {
     }
 
     @PostMapping("/getRules")
-    public ResponseEntity<String> getRules (@RequestBody AuditConfigDto auditConfigDto) {
+    public ResponseEntity<RuleDto> getRules (@RequestBody AuditConfigDto auditConfigDto) {
         return ResponseEntity.ok(contextService.getRules(auditConfigDto));
     }
 
