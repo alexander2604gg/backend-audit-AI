@@ -86,11 +86,9 @@ public class ContextServiceImpl implements ContextService {
                 "  }\n" +
                 "]";
 
-
+        prompts.add(prompt1);
         String response = chatService.getResponse(EnumValueRole.SYSTEM.getRole(), prompts);
         String json = jsonParserService.extractJson(response);
         return jsonParserService.toObject(json , RuleDto.class);
     }
-
-
 }
