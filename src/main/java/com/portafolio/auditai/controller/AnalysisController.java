@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 public class AnalysisController {
@@ -19,8 +21,8 @@ public class AnalysisController {
     private final AnalisysService analisysService;
 
     @PostMapping("/analysis")
-    public ResponseEntity<AuditResponseDto> getAnalysis(@RequestBody AuditRequestDto auditParametersDto) {
-        AuditResponseDto auditAnalysis = analisysService.getAuditAnalysis(auditParametersDto);
+    public ResponseEntity<List<AuditResponseDto>> getAnalysis(@RequestBody AuditRequestDto auditParametersDto) {
+        List<AuditResponseDto> auditAnalysis = analisysService.getAuditAnalysis(auditParametersDto);
         if (auditAnalysis != null) {
             return new ResponseEntity<>(auditAnalysis, HttpStatus.OK);
         } else {

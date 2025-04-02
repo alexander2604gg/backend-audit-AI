@@ -20,7 +20,7 @@ public class AnalysisServiceImpl implements AnalisysService {
     private final JsonParserService jsonParserService;
 
     @Override
-    public AuditResponseDto getAuditAnalysis(AuditRequestDto auditRequestDto) {
+    public List<AuditResponseDto> getAuditAnalysis(AuditRequestDto auditRequestDto) {
         List<String> prompts = new ArrayList<>();
 
         // Tipos de gráficos permitidos
@@ -50,6 +50,23 @@ public class AnalysisServiceImpl implements AnalisysService {
                 "    ]\n" +
                 "  },\n" +
                 "  \"description\": \"Resumen del análisis de auditoría basado en las normativas y reglas proporcionadas.\"\n" +
+                "}\n" +
+                "{\n" +
+                "  \"title\": \"Análisis de Auditoría 2\",\n" +
+                "  \"typeGrafic\": \"Bar\",\n" +
+                "  \"chartData\": {\n" +
+                "    \"labels\": [\"Ene\", \"Feb\", \"Mar\", \"Abr\"],\n" +
+                "    \"datasets\": [\n" +
+                "      {\n" +
+                "        \"label\": \"Cumplimiento\",\n" +
+                "        \"data\": [60, 70, 50, 80],\n" +
+                "        \"backgroundColor\": \"rgba(52, 152, 219, 0.7)\",\n" +
+                "        \"borderColor\": \"rgba(52, 152, 219, 1)\",\n" +
+                "        \"borderWidth\": 1\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  \"description\": \"Análisis adicional de las reglas aplicadas.\"\n" +
                 "}";
 
         prompts.add(prompt1);
@@ -59,15 +76,18 @@ public class AnalysisServiceImpl implements AnalisysService {
         String json = jsonParserService.extractJson(response);
 
         // Parsear el JSON recibido
-        AuditResponseDto auditResponseDto = jsonParserService.toObject(json, AuditResponseDto.class);
+        List<AuditResponseDto> auditResponseDtos = jsonParserService.toList(json, AuditResponseDto.class);
 
-        // Verificar si el tipo de gráfico es válido, si no, lo omitimos
-        if (auditResponseDto.getTypeGrafic() != null && !validChartTypes.contains(auditResponseDto.getTypeGrafic())) {
-            auditResponseDto.setTypeGrafic(null);  // Omitimos el campo si el tipo no es válido
+        // Verificar si los tipos de gráficos son válidos, si no, lo omitimos
+        for (AuditResponseDto auditResponseDto : auditResponseDtos) {
+            if (auditResponseDto.getTypeGrafic() != null && !validChartTypes.contains(auditResponseDto.getTypeGrafic())) {
+                auditResponseDto.setTypeGrafic(null);  // Omitimos el campo si el tipo no es válido
+            }
         }
 
-        return auditResponseDto;
+        return auditResponseDtos;
     }
+
 
 
 }

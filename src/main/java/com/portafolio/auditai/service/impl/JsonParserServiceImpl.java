@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,6 +23,15 @@ public class JsonParserServiceImpl implements JsonParserService {
         try {
             return objectMapper.readValue(json , object);
         } catch (JsonProcessingException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public <T> List<T> toList(String json, Class<T> objectType) {
+        try {
+            return objectMapper.readValue(json, objectMapper.getTypeFactory().constructCollectionType(List.class, objectType));
+        } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
     }
