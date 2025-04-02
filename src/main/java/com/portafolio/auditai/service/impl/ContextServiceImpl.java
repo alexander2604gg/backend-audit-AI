@@ -28,7 +28,7 @@ public class ContextServiceImpl implements ContextService {
     @Override
     public RecommendedRulesDto getRulesRecommendations(AuditParametersDto auditParametersDto) {
         List<String> prompts = new ArrayList<>();
-        String prompt1 = "Genera una lista de normativas recomendadas para una auditoría basado en la siguiente información: " +
+        String prompt1 = "Genera una lista de maximo 5 normativas recomendadas para una auditoría basado en la siguiente información: " +
                 "Sector: " + auditParametersDto.getSector() +
                 ", Tipo de auditoría: " + auditParametersDto.getAuditType();
         String prompt2 = "Tu respuesta solo será en formato JSON";
