@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -62,4 +63,5 @@ public class JsonParserServiceImpl implements JsonParserService {
         }
         throw new IllegalArgumentException("No se encontró JSON válido en la respuesta");
     }
+
 }

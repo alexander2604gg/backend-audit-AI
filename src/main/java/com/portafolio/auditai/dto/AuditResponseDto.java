@@ -21,8 +21,8 @@ public class AuditResponseDto {
     public static class Dataset {
         private String label;
         private List<Integer> data;
-        private String backgroundColor;
-        private String borderColor;
+        private List<String> backgroundColor;
+        private List<String> borderColor;
         private int borderWidth;
     }
 
