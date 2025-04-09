@@ -46,8 +46,6 @@ public class AnalysisServiceImpl implements AnalisysService {
                 "          {\n" +
                 "            \"label\": \"Cumplimiento\",\n" +
                 "            \"data\": [75, 80, 70, 90, 85, 95],\n" +
-                "            \"backgroundColor\": [\"rgba(46, 204, 113, 0.7)\", \"rgba(46, 204, 113, 0.7)\", \"rgba(46, 204, 113, 0.7)\", \"rgba(46, 204, 113, 0.7)\", \"rgba(46, 204, 113, 0.7)\", \"rgba(46, 204, 113, 0.7)\"],\n" +
-                "            \"borderColor\": [\"rgba(46, 204, 113, 1)\", \"rgba(46, 204, 113, 1)\", \"rgba(46, 204, 113, 1)\", \"rgba(46, 204, 113, 1)\", \"rgba(46, 204, 113, 1)\", \"rgba(46, 204, 113, 1)\"],\n" +
                 "            \"borderWidth\": 1\n" +
                 "          }\n" +
                 "        ]\n" +
@@ -63,8 +61,6 @@ public class AnalysisServiceImpl implements AnalisysService {
                 "          {\n" +
                 "            \"label\": \"Cumplimiento\",\n" +
                 "            \"data\": [60, 70, 50, 80],\n" +
-                "            \"backgroundColor\": [\"rgba(52, 152, 219, 0.7)\", \"rgba(52, 152, 219, 0.7)\", \"rgba(52, 152, 219, 0.7)\", \"rgba(52, 152, 219, 0.7)\"],\n" +
-                "            \"borderColor\": [\"rgba(52, 152, 219, 1)\", \"rgba(52, 152, 219, 1)\", \"rgba(52, 152, 219, 1)\", \"rgba(52, 152, 219, 1)\"],\n" +
                 "            \"borderWidth\": 1\n" +
                 "          }\n" +
                 "        ]\n" +
