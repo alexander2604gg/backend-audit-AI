@@ -1,4 +1,2 @@
 version: 1.0
 runtime: docker
-build:
-  dockerfilePath: Dockerfile
