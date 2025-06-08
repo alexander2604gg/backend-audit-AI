@@ -12,6 +12,6 @@ WORKDIR /app
 
 COPY --from=build /app/target/auditai-0.0.1-SNAPSHOT.jar /app/auditai.jar
 
-EXPOSE ${PORT}
+EXPOSE 8080
 
 CMD ["java", "-jar", "/app/auditai.jar"]
